@@ -163,7 +163,7 @@ const details = () => ({
       ==WARNING== \\n
       Just because a cmd is mentioned doesn't mean your installed version of ffmpeg supports it... 
       Be certain to verify the cmds work before adding to your workflow. \\n
-      Check Tdarr Help Tab. Enter ffmpeg cmd - "-h encoder=hevc_qsv". This will give a list of supported commands. \\n
+      Check Tdarr Help Tab. Enter ffmpeg cmd - "-h encoder=av1_qsv". This will give a list of supported commands. \\n
       MAC SPECIFIC - This option is ignored on Mac because videotoolbox is used rather than qsv.
       \\n
       ==INFO==
@@ -774,7 +774,7 @@ const plugin = (file, librarySettings, inputs, otherArguments) => {
           response.preset += '-c:v vp8_qsv';
           break;
         case 'hevc':
-          response.preset += '-c:v hevc_qsv';
+          response.preset += '-c:v av1_qsv';
           break;
         case 'vp9': // Should be supported by 8th Gen +
           response.preset += '-c:v vp9_qsv';
@@ -795,14 +795,14 @@ const plugin = (file, librarySettings, inputs, otherArguments) => {
       // Mac OS & uses hevc_videotoolbox not QSV - Only shows up on Mac installs
       break;
     case 'linux':
-      response.preset += 'hevc_qsv';
+      response.preset += 'av1_qsv';
       break;
     case 'win32':
-      response.preset += 'hevc_qsv -load_plugin hevc_hw';
+      response.preset += 'av1_qsv -load_plugin hevc_hw';
       // Windows needs the additional -load_plugin. Tested working on a Win 10 - i5-10505
       break;
     default:
-      response.preset += 'hevc_qsv'; // Default to QSV
+      response.preset += 'av1_qsv'; // Default to QSV
   }
 
   // Add the rest of the ffmpeg command
